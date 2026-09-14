@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+  <h2>{{ titulo }}</h2>
+
+  {% if erros %}
+    <p class="erro-geral">corrija os campos indicados abaixo.</p>
+  {% endif %}
+
+  <form method="post" action="{{ acao }}">
+
+    <p>
+      <label for="placa">placa</label>
+      <input type="text" id="placa" name="placa" value="{{ dados.get('placa', '') }}">
+      {% if erros.get('placa') %}<span class="erro">{{ erros['placa'] }}</span>{% endif %}
+    </p>
+
+    <p>
+      <label for="marca">marca</label>
+      <input type="text" id="marca" name="marca" value="{{ dados.get('marca', '') }}">
+      {% if erros.get('marca') %}<span class="erro">{{ erros['marca'] }}</span>{% endif %}
+    </p>
+
+    <p>
+      <label for="modelo">modelo</label>
+      <input type="text" id="modelo" name="modelo" value="{{ dados.get('modelo', '') }}">
+      {% if erros.get('modelo') %}<span class="erro">{{ erros['modelo'] }}</span>{% endif %}
+    </p>
+
+    <p>
+      <label for="ano">ano</label>
+      <input type="text" id="ano" name="ano" value="{{ dados.get('ano', '') }}">
+      {% if erros.get('ano') %}<span class="erro">{{ erros['ano'] }}</span>{% endif %}
+    </p>
+
+    <p>
+      <label for="nome_proprietario">proprietario</label>
+      <input type="text" id="nome_proprietario" name="nome_proprietario" value="{{ dados.get('nome_proprietario', '') }}">
+      {% if erros.get('nome_proprietario') %}<span class="erro">{{ erros['nome_proprietario'] }}</span>{% endif %}
+    </p>
+
+    <p>
+      <button type="submit">salvar</button>
+      <a href="{{ url_for('listar') }}">cancelar</a>
+    </p>
+
+  </form>
+{% endblock %}

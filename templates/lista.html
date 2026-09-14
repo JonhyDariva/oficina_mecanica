@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block titulo %}veiculos cadastrados{% endblock %}
+
+{% block conteudo %}
+  <h2>veiculos cadastrados</h2>
+
+  {% if msg %}
+    <p class="sucesso">{{ msg }}</p>
+  {% endif %}
+
+  <p><a class="botao" href="{{ url_for('novo') }}">+ cadastrar veiculo</a></p>
+
+  {% if veiculos %}
+    <p>{{ veiculos|length }} registro(s) no banco.</p>
+    <table>
+      <tr>
+        <th>placa</th>
+        <th>marca / modelo</th>
+        <th>ano</th>
+        <th>proprietario</th>
+        <th>acoes</th>
+      </tr>
+      {% for v in veiculos %}
+      <tr>
+        <td><a href="{{ url_for('detalhe', id_veiculo=v['id']) }}">{{ v['placa'] }}</a></td>
+        <td>{{ v['marca'] }} {{ v['modelo'] }}</td>
+        <td>{{ v['ano'] }}</td>
+        <td>{{ v['nome_proprietario'] }}</td>
+        <td>
+          <a href="{{ url_for('editar', id_veiculo=v['id']) }}">editar</a>
+          <form method="post" action="{{ url_for('excluir', id_veiculo=v['id']) }}"
+                onsubmit="return confirm('excluir o veiculo {{ v['placa'] }}?');">
+            <button type="submit" class="link-perigo">excluir</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p class="vazio">nenhum veiculo cadastrado ainda.</p>
+  {% endif %}
+{% endblock %}

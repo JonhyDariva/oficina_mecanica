@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ veiculo['placa'] }}{% endblock %}
+
+{% block conteudo %}
+  <h2>{{ veiculo['marca'] }} {{ veiculo['modelo'] }} - {{ veiculo['placa'] }}</h2>
+
+  <ul class="detalhe">
+    <li><b>placa:</b> {{ veiculo['placa'] }}</li>
+    <li><b>marca:</b> {{ veiculo['marca'] }}</li>
+    <li><b>modelo:</b> {{ veiculo['modelo'] }}</li>
+    <li><b>ano:</b> {{ veiculo['ano'] }}</li>
+    <li><b>proprietario:</b> {{ veiculo['nome_proprietario'] }}</li>
+  </ul>
+
+  <p>
+    <a class="botao" href="{{ url_for('editar', id_veiculo=veiculo['id']) }}">editar</a>
+    <a href="{{ url_for('listar') }}">voltar para a lista</a>
+  </p>
+
+  <form method="post" action="{{ url_for('excluir', id_veiculo=veiculo['id']) }}"
+        onsubmit="return confirm('excluir o veiculo {{ veiculo['placa'] }}? esta acao nao pode ser desfeita.');">
+    <button type="submit" class="perigo">excluir este veiculo</button>
+  </form>
+
+  <h3>servicos</h3>
+
+  {% if servicos %}
+    <table>
+      <tr>
+        <th>data</th>
+        <th>descricao</th>
+        <th>valor</th>
+        <th>concluido</th>
+      </tr>
+      {% for s in servicos %}
+      <tr>
+        <td>{{ s['data_entrada'] }}</td>
+        <td>{{ s['descricao'] }}</td>
+        <td>r$ {{ "%.2f"|format(s['valor']) }}</td>
+        <td>{{ s['concluido'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p class="vazio">nenhum servico registrado para este veiculo ainda.</p>
+  {% endif %}
+{% endblock %}

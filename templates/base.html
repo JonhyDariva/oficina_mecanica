@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>{% block titulo %}oficina mecanica{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+
+  <header>
+    <h1>oficina mecanica</h1>
+    <nav>
+      <a href="{{ url_for('listar') }}">veiculos</a>
+      <a href="{{ url_for('buscar') }}">buscar</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  <footer>
+    ibm4023 - ac1 - projeto em ciencia de dados i
+  </footer>
+
+</body>
+</html>
