@@ -12,10 +12,10 @@ opcao b, oficina mecanica
 para rodar do 0
 
 python -m venv .venv  
-  .venv\Scripts\activate (windows) ou source .venv/bin/activate (linux/mac)
-     pip install -r requirements.txt
-    python dados_iniciais.py
-    python app.py
+.venv\Scripts\activate (windows)  ou  source .venv/bin/activate (linux/mac)
+pip install -r requirements.txt
+python dados_iniciais.py
+python app.py
 
 abrir http://127.0.0.1:5000 no navegador
 
